@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.AdviceFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/advice_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_top_sheet_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="@dimen/elevation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UnusedAttribute" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/advice_patient_photo"
+            android:layout_gravity="center|left"
+            app:shapeAppearanceOverlay="@style/fullRoundEdge"
+            android:background="@color/white"
+            app:strokeColor="@color/medicana_light"
+            app:strokeWidth="1dp"
+            android:padding="1dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginVertical="10dp"
+            tools:src="@tools:sample/avatars"
+            tools:ignore="RtlHardcoded" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center|left"
+            tools:ignore="RtlHardcoded">
+
+            <TextView
+                android:id="@+id/advice_patient_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:text="TextView"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:singleLine="true"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/advice_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingVertical="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/message_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/advice_toolbar" />
+
+    <LinearLayout
+        android:id="@+id/message_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_bottom_sheet_white"
+        android:elevation="@dimen/elevation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="UnusedAttribute">
+
+        <EditText
+            android:id="@+id/advice_message_to_send"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_rounded_edge"
+            android:hint="@string/ask_me"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minHeight="40dp"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="10dp"
+            android:textColorHighlight="@color/medicana_light"
+            android:textColorLink="@color/medicana_light"
+            android:textCursorDrawable="@drawable/ic_cursor"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/advice_send"
+            android:layout_gravity="right|bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="22dp"
+            android:layout_marginHorizontal="16dp"
+            app:srcCompat="@drawable/ic_send"
+            android:contentDescription="@string/send"
+            tools:ignore="RtlHardcoded" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

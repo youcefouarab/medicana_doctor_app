@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_medicana_logo"
+    android:insetLeft="30%"
+    android:insetTop="32%"
+    android:insetRight="30%"
+    android:insetBottom="32%"
+    />

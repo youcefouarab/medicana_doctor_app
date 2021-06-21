@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">Medicana - pour les médecins</string>
+    <string name="app_title">Medicana</string>
+    <string name="app_subtitle">Pour les médecins</string>
+    <string name="auth_phone_number">Numéro de téléphone</string>
+    <string name="auth_password">Mot de passe</string>
+    <string name="auth_login">Se connecter</string>
+    <string name="auth_welcome">Bienvenus</string>
+    <string name="auth_invalid">Numéro de téléphone ou mot de passe invalide</string>
+    <string name="menu_doctors">Médecins</string>
+    <string name="menu_appointments">RDVs</string>
+    <string name="menu_treatments">Traitements</string>
+    <string name="menu_advice">Conseils</string>
+    <string name="menu_profile">Profil</string>
+    <string name="book_appointment">Prenez rendez-vous</string>
+    <string name="cancel_appointment">Annuler rendez-vous</string>
+    <string name="find_doctos">Trouvez des médecins et prenez rendez-vous</string>
+    <string name="need_auth">Pour continuer, vous devez vous connecter</string>
+    <string name="appointment_ready">Votre rendez-vous est prêt maintenant!</string>
+    <string name="confirm">Confirmer</string>
+    <string name="cancel">Annuler</string>
+    <string name="my_appointments">Restez au courant de vos rendez-vous</string>
+    <string name="ask_advice">Demandez conseil à vos médecins</string>
+    <string name="ask_me">Posez-moi une question!</string>
+    <string name="call">Appeler</string>
+    <string name="directions">Directions</string>
+
+    <string name="sun">Dim</string>
+    <string name="mon">Lun</string>
+    <string name="tue">Mar</string>
+    <string name="wed">Mer</string>
+    <string name="thu">Jeu</string>
+    <string name="fri">Ven</string>
+    <string name="sat">Sam</string>
+
+    <string name="welcome">Bienvenus!</string>
+    <string name="booking_success">Votre rendez-vous est pris!</string>
+    <string name="booking_cancel">Your appointment has been canceled!</string>
+
+    <string name="error">Une erreur est survenue</string>
+    <string name="internet_error">Pas d\'internet</string>
+    <string name="fb_error">Facebook n\'a pas été detecté</string>
+    <string name="login_error">Numéro de téléphone ou mot de passe erroné</string>
+    <string name="send">Send</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="logo">Logo</string>
+    <string name="message">Message</string>
+    <string name="logout">Logout</string>
+    <string name="prescribe_treatment">prescribe treatment</string>
+    <string name="start_date">Start date</string>
+    <string name="finish_date">Finish date</string>
+    <string name="db_error">Vos données n\'ont pas été recupérées complètement!</string>
+    <string name="give_advice_to_your_patients">Give advice to your patients</string>
+    <string name="scan_qr">Scan QR</string>
+    <string name="scan_a_qr">Scanner le code QR de votre patient et commencer le RDV</string>
+    <string name="click_to_scan">Click to scan</string>
+</resources>

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.AppointmentFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.AppointmentFragment"
+    android:background="@drawable/bg_full_medicana">
+
+        <androidx.appcompat.widget.Toolbar
+        android:id="@+id/appointment_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/appointment_patient_photo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="50dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/appointment_toolbar"
+        app:shapeAppearanceOverlay="@style/bigRoundEdge"
+        tools:srcCompat="@tools:sample/avatars"/>
+
+    <TextView
+        android:id="@+id/appointment_patient_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:singleLine="true"
+        android:text="TextView"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/appointment_patient_photo"
+        app:layout_constraintStart_toStartOf="@+id/appointment_patient_photo"
+        app:layout_constraintTop_toBottomOf="@+id/appointment_patient_photo"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/appointment_patient_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="TextView"
+        android:textColor="@color/white"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="@+id/appointment_patient_name"
+        app:layout_constraintStart_toStartOf="@+id/appointment_patient_name"
+        app:layout_constraintTop_toBottomOf="@+id/appointment_patient_name"
+        tools:ignore="HardcodedText" />
+
+            <LinearLayout
+                android:id="@+id/appointment_sheet"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_bottom_sheet_white"
+                android:orientation="vertical"
+                android:elevation="@dimen/elevation"
+                android:layout_marginTop="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appointment_patient_phone"
+                tools:ignore="UnusedAttribute">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginLeft="50dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_date"
+                        android:contentDescription="@string/date"
+                         />
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginEnd="50dp"
+                        android:layout_marginRight="50dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_time"
+                        android:contentDescription="@string/time" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/appointment_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="TextView"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginLeft="50dp"
+                        android:textAlignment="center"
+                        android:textColor="@color/medicana_light"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:id="@+id/appointment_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="TextView"
+                        android:layout_marginEnd="50dp"
+                        android:layout_marginRight="50dp"
+                        android:textAlignment="center"
+                        android:textColor="@color/medicana_light"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:elevation="@dimen/elevation"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="45dp"
+            tools:ignore="UnusedAttribute">
+
+            <LinearLayout
+                android:id="@+id/appointment_bottom_sheet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_bottom_sheet_white"
+                android:elevation="@dimen/elevation"
+                android:orientation="vertical">
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingVertical="32dp"
+                        android:text="@string/prescribe_treatment"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="32dp"
+                        android:layout_marginVertical="16dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/editTextDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/text_field_height"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_rounded_edge"
+                            android:drawablePadding="15dp"
+                            android:hint="@string/start_date"
+                            android:importantForAutofill="no"
+                            android:inputType="date"
+                            android:paddingHorizontal="15dp"
+                            app:drawableLeftCompat="@drawable/ic_date"
+                            app:drawableStartCompat="@drawable/ic_date" />
+
+                        <EditText
+                            android:id="@+id/editTextTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/text_field_height"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_rounded_edge"
+                            android:drawablePadding="15dp"
+                            android:hint="@string/finish_date"
+                            android:importantForAutofill="no"
+                            android:inputType="date"
+                            android:paddingHorizontal="15dp"
+                            app:drawableLeftCompat="@drawable/ic_date"
+                            app:drawableStartCompat="@drawable/ic_date" />
+
+                    </LinearLayout>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="32dp"
+                        android:background="@drawable/bg_rounded_edge"
+                        android:gravity="left|top"
+                        android:hint="@string/prescribe_treatment"
+                        android:importantForAutofill="no"
+                        android:inputType="textMultiLine"
+                        android:minHeight="100dp"
+                        android:padding="16dp"
+                        tools:ignore="RtlHardcoded" />
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/button_height"
+                        android:layout_marginHorizontal="32dp"
+                        android:layout_marginVertical="32dp"
+                        android:background="@drawable/bg_rounded"
+                        android:text="@string/prescribe_treatment"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                </androidx.core.widget.NestedScrollView>
+            </LinearLayout>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
