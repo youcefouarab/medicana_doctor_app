@@ -93,7 +93,7 @@
             android:background="@drawable/bg_rounded_edge"
             android:hint="@string/ask_me"
             android:importantForAutofill="no"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             android:minHeight="40dp"
             android:paddingHorizontal="15dp"
             android:paddingVertical="10dp"

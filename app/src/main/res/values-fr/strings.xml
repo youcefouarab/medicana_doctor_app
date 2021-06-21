@@ -55,4 +55,5 @@
     <string name="scan_qr">Scan QR</string>
     <string name="scan_a_qr">Scanner le code QR de votre patient et commencer le RDV</string>
     <string name="click_to_scan">Click to scan</string>
+    <string name="pick_date_range">Pick date range</string>
 </resources>
