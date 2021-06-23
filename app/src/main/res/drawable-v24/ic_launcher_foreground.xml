@@ -2,7 +2,7 @@
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/ic_medicana_logo"
     android:insetLeft="30%"
-    android:insetTop="32%"
+    android:insetTop="30%"
     android:insetRight="30%"
-    android:insetBottom="32%"
+    android:insetBottom="30%"
     />

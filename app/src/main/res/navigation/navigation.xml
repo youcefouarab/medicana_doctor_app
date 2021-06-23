@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_nav_host_to_appointmentFragment"
             app:destination="@id/appointmentFragment" />
+        <action
+            android:id="@+id/action_nav_host_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
     </fragment>
     <fragment
         android:id="@+id/authFragment"
@@ -70,4 +73,8 @@
         android:name="com.example.medicana.fragment.AdviceFragment"
         android:label="fragment_advice"
         tools:layout="@layout/fragment_advice" />
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.example.medicana.fragment.CameraFragment"
+        android:label="CameraFragment" />
 </navigation>
