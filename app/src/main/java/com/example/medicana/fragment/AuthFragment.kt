@@ -1,7 +1,6 @@
 package com.example.medicana.fragment
 
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,10 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.edit
 import androidx.navigation.ui.setupWithNavController
+import com.example.medicana.prefs.SharedPrefs
 import com.example.medicana.R
-import com.example.medicana.SHARED_PREFS
 import com.example.medicana.entity.Advice
 import com.example.medicana.entity.Appointment
 import com.example.medicana.entity.Doctor
@@ -65,19 +63,16 @@ class AuthFragment : Fragment() {
                         if (response?.isSuccessful!!) {
                             val doctor = response.body()
                             if (doctor?.doctor_id != null) {
-                                val pref =
-                                    act.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
-                                pref.edit {
-                                    putBoolean("connected", true)
-                                    putLong("doctor_id", doctor.doctor_id)
-                                    putString("phone_number", doctor.phone_number)
-                                    putString("first_name", doctor.first_name)
-                                    putString("last_name", doctor.last_name)
-                                    putString("address", doctor.address)
-                                    putString("gender", doctor.gender)
-                                    putString("photo", doctor.photo)
-                                    putString("specialty", doctor.specialty)
-                                }
+                                val prefs = SharedPrefs(act)
+                                prefs.connected = true
+                                prefs.doctorId = doctor.doctor_id
+                                prefs.phoneNumber = doctor.phone_number
+                                prefs.firstName = doctor.first_name
+                                prefs.lastName = doctor.last_name
+                                prefs.address = doctor.address
+                                prefs.gender = doctor.gender
+                                prefs.photo = doctor.photo
+                                prefs.specialty = doctor.specialty
                                 reloadRoomDatabase(doctor.doctor_id)
                                 Toast.makeText(act, R.string.welcome, Toast.LENGTH_LONG).show()
                                 navController(act).navigateUp()

@@ -1,7 +1,6 @@
 package com.example.medicana.dao
 
 import androidx.room.*
-import com.example.medicana.entity.Doctor
 import com.example.medicana.entity.Patient
 
 @Dao

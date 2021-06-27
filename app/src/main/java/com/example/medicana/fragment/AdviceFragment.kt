@@ -2,26 +2,23 @@ package com.example.medicana.fragment
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.work.*
 import com.bumptech.glide.Glide
-import com.example.medicana.MainViewModel
 import com.example.medicana.R
-import com.example.medicana.SHARED_PREFS
 import com.example.medicana.service.AdviceAddSyncService
 import com.example.medicana.adapter.AdviceAdapter
 import com.example.medicana.room.RoomService
 import com.example.medicana.entity.Advice
+import com.example.medicana.prefs.SharedPrefs
 import com.example.medicana.util.navController
+import com.example.medicana.viewmodel.VM.vm
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_advice.*
 
@@ -50,12 +47,9 @@ class AdviceFragment : Fragment() {
         advice_toolbar?.setupWithNavController(navController(act))
         advice_toolbar?.title = ""
 
-        val patient =
-            (ViewModelProvider(context as ViewModelStoreOwner).get(MainViewModel::class.java))
-            .patient
+        val patient = vm.patient
 
-        val doctorId = (act.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE))
-            .getLong("doctor_id", 0)
+        val doctorId = SharedPrefs(act).doctorId
 
         advice_patient_name?.text = patient?.first_name + " " + patient?.last_name
 
@@ -91,9 +85,7 @@ class AdviceFragment : Fragment() {
     }
 
     private fun reload() {
-        val patient =
-            (ViewModelProvider(context as ViewModelStoreOwner).get(MainViewModel::class.java))
-            .patient
+        val patient = vm.patient
 
         advice_list?.adapter = AdviceAdapter(act, RoomService.appDatabase.getAdviceDao().getAdviceWithPatient(patient?.patient_id))
     }
@@ -102,8 +94,7 @@ class AdviceFragment : Fragment() {
         val constraints = Constraints.Builder().
         setRequiredNetworkType(NetworkType.CONNECTED).build()
         val req= OneTimeWorkRequest.Builder(AdviceAddSyncService::class.java).
-        setConstraints(constraints).addTag("doctor_advice_add_constraints").
-        build()
+        setConstraints(constraints).addTag("doctor_advice_add_constraints").build()
         val workManager = WorkManager.getInstance(act)
         workManager.enqueueUniqueWork("doctor_advice_add_work", ExistingWorkPolicy.REPLACE,req)
 

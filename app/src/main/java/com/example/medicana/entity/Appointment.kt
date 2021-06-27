@@ -2,7 +2,6 @@ package com.example.medicana.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.medicana.util.unixTimestamp
 import java.io.Serializable
 
 @Entity(tableName = "appointment")

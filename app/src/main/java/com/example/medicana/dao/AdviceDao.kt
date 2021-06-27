@@ -1,8 +1,8 @@
 package com.example.medicana.dao
 
 import androidx.room.*
-import com.example.medicana.MESSAGE_SEEN
-import com.example.medicana.MESSAGE_SENT
+import com.example.medicana.util.MESSAGE_SEEN
+import com.example.medicana.util.MESSAGE_SENT
 import com.example.medicana.entity.Advice
 
 @Dao

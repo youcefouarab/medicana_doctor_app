@@ -8,10 +8,6 @@ import android.view.ViewGroup
 import com.example.medicana.R
 
 class CameraFragment : Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

@@ -2,16 +2,15 @@ package com.example.medicana.fragment
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.edit
 import com.bumptech.glide.Glide
 import com.example.medicana.R
-import com.example.medicana.SHARED_PREFS
+import com.example.medicana.prefs.SharedPrefs
+import com.example.medicana.room.RoomService
 import com.example.medicana.util.navController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_main.*
@@ -34,9 +33,7 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val connected =
-            (act.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE))
-                .getBoolean("connected", false)
+        val connected = SharedPrefs(act).connected
         return if (connected) {
             inflater.inflate(R.layout.fragment_profile, container, false)
         } else {
@@ -49,10 +46,10 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         act.nav_bottom?.visibility = View.VISIBLE
 
-        val pref = act.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
+        val pref = SharedPrefs(act)
 
-        profile_name?.text = pref.getString("first_name", "") + " " + pref.getString("last_name", "")
-        profile_phone?.text = pref.getString("phone_number", "")
+        profile_name?.text = pref.firstName + " " + pref.lastName
+        profile_phone?.text = pref.phoneNumber
 
         //Glide.with(context).load(BASE_URL + data[position].photo).into(holder.doctors_photo)
         if (profile_photo != null) {
@@ -65,8 +62,8 @@ class ProfileFragment : Fragment() {
                 peekHeight = 250
                 this.state = BottomSheetBehavior.STATE_COLLAPSED
             }
-            @Suppress("DEPRECATION")
-            bsBehave.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+
+            bsBehave.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
                 override fun onStateChanged(bottomSheet: View, newState: Int) {
                     if (newState == BottomSheetBehavior.STATE_COLLAPSED) dimmed_bg.visibility = View.GONE
                 }
@@ -79,9 +76,10 @@ class ProfileFragment : Fragment() {
         }
 
         profile_logout?.setOnClickListener {
-            pref.edit {
-                putBoolean("connected", false)
-            }
+            RoomService.appDatabase.getAppointmentDao().deleteAll()
+            RoomService.appDatabase.getAdviceDao().deleteAll()
+            RoomService.appDatabase.getPatientDao()
+            pref.connected = false
             navController(act).navigate(R.id.action_profileFragment_to_nav_host)
         }
 

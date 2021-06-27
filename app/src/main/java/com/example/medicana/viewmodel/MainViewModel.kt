@@ -1,4 +1,4 @@
-package com.example.medicana
+package com.example.medicana.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.example.medicana.entity.MyAppointment

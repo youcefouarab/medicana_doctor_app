@@ -2,9 +2,7 @@ package com.example.medicana.dao
 
 import androidx.room.*
 import com.example.medicana.entity.Appointment
-import com.example.medicana.entity.Doctor
 import com.example.medicana.entity.MyAppointment
-import java.io.Serializable
 
 @Dao
 interface AppointmentDao {

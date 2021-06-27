@@ -1,7 +1,6 @@
 package com.example.medicana.fragment
 
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.medicana.R
-import com.example.medicana.SHARED_PREFS
 import com.example.medicana.adapter.AppointmentAdapter
+import com.example.medicana.prefs.SharedPrefs
 import com.example.medicana.room.RoomService
 import com.example.medicana.util.navController
 import kotlinx.android.synthetic.main.activity_main.*
@@ -30,9 +29,7 @@ class AppointmentsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val connected =
-            (act.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE))
-            .getBoolean("connected", false)
+        val connected = SharedPrefs(act).connected
         return if (connected) {
             inflater.inflate(R.layout.fragment_appointments, container, false)
         } else {

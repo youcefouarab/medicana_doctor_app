@@ -1,14 +1,13 @@
 package com.example.medicana.fragment
 
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.medicana.R
-import com.example.medicana.SHARED_PREFS
+import com.example.medicana.prefs.SharedPrefs
 import com.example.medicana.util.navController
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_need_auth.*
@@ -26,9 +25,7 @@ class OldAppointmentsFragment : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        val connected =
-                (act.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE))
-                        .getBoolean("connected", false)
+        val connected = SharedPrefs(act).connected
         return if (connected) {
             inflater.inflate(R.layout.fragment_old_appointments, container, false)
         } else {

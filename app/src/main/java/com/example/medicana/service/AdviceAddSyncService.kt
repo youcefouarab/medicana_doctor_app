@@ -6,7 +6,7 @@ import android.content.Context
 import androidx.work.ListenableWorker
 import androidx.work.WorkerParameters
 import androidx.work.impl.utils.futures.SettableFuture
-import com.example.medicana.RES_SUCCESS
+import com.example.medicana.util.RES_SUCCESS
 import com.example.medicana.room.RoomService
 import com.example.medicana.entity.Advice
 import com.example.medicana.retrofit.RetrofitService
@@ -16,7 +16,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 @SuppressLint("RestrictedApi")
-class AdviceAddSyncService(private val ctx: Context, private val workParameters: WorkerParameters): ListenableWorker(ctx, workParameters) {
+class AdviceAddSyncService(ctx: Context, workParameters: WorkerParameters): ListenableWorker(ctx, workParameters) {
 
     lateinit var  future: SettableFuture<Result>
 
@@ -36,7 +36,7 @@ class AdviceAddSyncService(private val ctx: Context, private val workParameters:
             }
             override fun onResponse(call: Call<String>?, response: Response<String>?) {
                 if (response?.isSuccessful!!) {
-                    if (response?.body() == RES_SUCCESS) {
+                    if (response.body() == RES_SUCCESS) {
                         for (item in advice) {
                             item.is_sync = 1
                         }

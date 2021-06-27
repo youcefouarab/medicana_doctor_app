@@ -1,6 +1,6 @@
 package com.example.medicana.retrofit
 
-import com.example.medicana.BASE_URL
+import com.example.medicana.util.BASE_URL
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

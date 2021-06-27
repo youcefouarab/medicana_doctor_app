@@ -15,11 +15,11 @@ import com.example.medicana.util.displayTimeFromUnix
 
 class AdviceAdapter(val context: Context, val data: List<Advice>): RecyclerView.Adapter<AdviceViewHolder>() {
 
-    private val MESSAGE = 0
-    private val REPLY = 1
+    private val message = 0
+    private val reply = 1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdviceViewHolder {
-        return if (viewType == MESSAGE) {
+        return if (viewType == message) {
             AdviceViewHolder(
                     LayoutInflater.from(context).inflate(R.layout.layout_advice_message, parent, false)
             )
@@ -32,9 +32,9 @@ class AdviceAdapter(val context: Context, val data: List<Advice>): RecyclerView.
 
     override fun getItemViewType(position: Int): Int {
         return if (data[position].message != null) {
-            MESSAGE
+            message
         } else {
-            REPLY
+            reply
         }
     }
 

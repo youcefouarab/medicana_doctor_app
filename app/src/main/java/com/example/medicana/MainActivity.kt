@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.ui.NavigationUI
 import com.example.medicana.util.navController
+import com.example.medicana.viewmodel.VM
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -11,6 +12,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        VM.context = this
 
         setContentView(R.layout.activity_main)
         NavigationUI.setupWithNavController(nav_bottom, navController(this))
