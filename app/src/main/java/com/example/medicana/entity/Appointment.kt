@@ -8,10 +8,9 @@ import java.io.Serializable
 data class Appointment (
     @PrimaryKey
     val appointment_id: Long? = null,
-    val doctor_id: Long?,
+    val doctor_id: Long? = null,
     val patient_id: Long? = null,
     val date: String?,
-    val time: String?,
-    val done: Int? = 0
+    val time: String?
 
 ): Serializable

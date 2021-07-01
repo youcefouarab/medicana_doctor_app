@@ -9,6 +9,9 @@ interface AppointmentDao {
     @Query("SELECT * FROM appointment NATURAL JOIN patient")
     fun getMyAppointments(): List<MyAppointment>
 
+    @Query("SELECT * FROM appointment NATURAL JOIN patient WHERE appointment_id = :appointment_id")
+    fun getMyAppointment(appointment_id: Long?): MyAppointment?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addMyAppointment(appointment: Appointment)
 

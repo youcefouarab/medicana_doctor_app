@@ -64,8 +64,8 @@ class AppointmentFragment : Fragment() {
                 Glide.with(act).load(R.drawable.default_profile).into(appointment_patient_photo!!)
             }
 
-            appointment_date?.text = displayDate(myAppointment.date!!)
-            appointment_time?.text = myAppointment.time
+            appointment_date?.text = displayDate(myAppointment?.date!!)
+            appointment_time?.text = myAppointment?.time
         }
 
         need_auth_toolbar?.setupWithNavController(navController(act))
@@ -73,6 +73,11 @@ class AppointmentFragment : Fragment() {
         need_auth_button?.setOnClickListener {
             navController(act).navigate(R.id.action_nav_host_to_authFragment)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        vm.myAppointment = null
     }
 
 }

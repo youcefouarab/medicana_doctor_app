@@ -76,5 +76,9 @@
     <fragment
         android:id="@+id/cameraFragment"
         android:name="com.example.medicana.fragment.CameraFragment"
-        android:label="CameraFragment" />
+        android:label="CameraFragment" >
+        <action
+            android:id="@+id/action_cameraFragment_to_appointmentFragment"
+            app:destination="@id/appointmentFragment" />
+    </fragment>
 </navigation>

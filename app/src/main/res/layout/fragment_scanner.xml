@@ -42,7 +42,7 @@
         tools:ignore="UseCompoundDrawables">
 
         <ImageView
-        android:id="@+id/the_scanner"
+        android:id="@+id/scanner_btn"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center|top"
@@ -60,16 +60,6 @@
             android:text="@string/click_to_scan"/>
 
     </LinearLayout>
-
-    <androidx.camera.view.PreviewView
-        android:visibility="gone"
-        android:id="@+id/scanner_preview"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/scanner_sheet" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -10,6 +10,12 @@ interface Endpoint {
         @Path("doctor_id") doctor_id: Long?
     ): Call<List<Appointment>>
 
+    @GET("doctor_appointment/{doctor_id}/{appointment_id}")
+    fun getMyAppointment(
+        @Path("doctor_id") doctor_id: Long?,
+        @Path("appointment_id") appointment_id: Long?
+    ): Call<MyAppointment>
+
     @GET("doctor_patients/{doctor_id}")
     fun getMyPatients(
         @Path("doctor_id") doctor_id: Long?
