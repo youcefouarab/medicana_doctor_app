@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.room.Room
 import com.bumptech.glide.Glide
 import com.example.medicana.R
 import com.example.medicana.prefs.SharedPrefs
@@ -78,7 +79,8 @@ class ProfileFragment : Fragment() {
         profile_logout?.setOnClickListener {
             RoomService.appDatabase.getAppointmentDao().deleteAll()
             RoomService.appDatabase.getAdviceDao().deleteAll()
-            RoomService.appDatabase.getPatientDao()
+            RoomService.appDatabase.getPatientDao().deleteAll()
+            RoomService.appDatabase.getTreatmentDao().deleteAll()
             pref.connected = false
             navController(act).navigate(R.id.action_profileFragment_to_nav_host)
         }

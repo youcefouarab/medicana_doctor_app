@@ -1,9 +1,15 @@
 package com.example.medicana
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.view.Window
+import android.view.WindowInsets
+import android.view.WindowManager
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.ui.NavigationUI
-import com.example.medicana.room.RoomService
 import com.example.medicana.util.navController
 import com.example.medicana.viewmodel.VM
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -16,9 +22,8 @@ class MainActivity : AppCompatActivity() {
 
         VM.context = this
 
-        RoomService.appDatabase.getAppointmentDao().deleteAll()
-
         setContentView(R.layout.activity_main)
+
         NavigationUI.setupWithNavController(nav_bottom, navController(this))
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when(item.itemId) {
@@ -42,7 +47,5 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navController(this).navigateUp()
     }
-
-
 
 }

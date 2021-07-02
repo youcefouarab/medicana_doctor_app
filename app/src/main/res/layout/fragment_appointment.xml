@@ -142,7 +142,6 @@
                         tools:ignore="HardcodedText" />
                 </LinearLayout>
 
-
             </LinearLayout>
 
 
@@ -162,7 +161,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:elevation="@dimen/elevation"
-                android:background="@drawable/bg_rounded_white"
+                android:background="@drawable/bg_bottom_sheet_white_rounded_edge"
                 app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
             <LinearLayout
@@ -183,6 +182,7 @@
                     android:textStyle="bold" />
 
                     <Button
+                        android:id="@+id/treatment_date_picker"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/button_height"
                         android:background="@drawable/bg_rounded_edge"
@@ -198,6 +198,7 @@
 
 
                     <EditText
+                        android:id="@+id/treatment_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="32dp"
@@ -212,6 +213,7 @@
                         tools:ignore="RtlHardcoded" />
 
                     <Button
+                        android:id="@+id/prescribe_treatment"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/button_height"
                         android:layout_marginHorizontal="32dp"

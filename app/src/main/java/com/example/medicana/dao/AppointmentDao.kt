@@ -6,10 +6,10 @@ import com.example.medicana.entity.MyAppointment
 
 @Dao
 interface AppointmentDao {
-    @Query("SELECT * FROM appointment NATURAL JOIN patient")
+    @Query("SELECT * FROM appointment A LEFT JOIN treatment ON A.treatment_id = treatment.treatment_id NATURAL JOIN patient")
     fun getMyAppointments(): List<MyAppointment>
 
-    @Query("SELECT * FROM appointment NATURAL JOIN patient WHERE appointment_id = :appointment_id")
+    @Query("SELECT * FROM appointment A LEFT JOIN treatment ON A.treatment_id = treatment.treatment_id NATURAL JOIN patient WHERE appointment_id = :appointment_id")
     fun getMyAppointment(appointment_id: Long?): MyAppointment?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -18,11 +18,8 @@ interface AppointmentDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addMyAppointments(appointments: List<Appointment>)
 
-    @Query("DELETE FROM appointment WHERE appointment_id = :appointment_id")
-    fun deleteMyAppointment(appointment_id: Long?)
-
-    @Query("SELECT count(*) FROM appointment WHERE doctor_id = :doctor_id")
-    fun checkAppointmentsWithDoctorExist(doctor_id: Long?): Int
+    @Query("UPDATE appointment SET treatment_id = :treatment_id WHERE appointment_id = :appointment_id")
+    fun setAppointmentTreatment(treatment_id: Long, appointment_id: Long)
 
     @Query("DELETE FROM appointment")
     fun deleteAll()

@@ -56,6 +56,5 @@
     <string name="scan_a_qr">Scan the QR code from your patient and start the appointment</string>
     <string name="click_to_scan">Click to scan</string>
     <string name="pick_date_range">Pick date range</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

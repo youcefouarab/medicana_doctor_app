@@ -40,5 +40,18 @@ interface Endpoint {
     fun getAllAdvice(
             @Path("doctor_id") doctor_id: Long?
     ): Call<List<Advice>>
+
+    @POST("prescribe_treatment/{start_date}/{finish_date}/{description}/{appointment_id}")
+    fun prescribeTreatment(
+            @Path("start_date") start_date: String?,
+            @Path("finish_date") finish_date: String?,
+            @Path("description") description: String?,
+            @Path("appointment_id") appointment_id: Long?
+    ): Call<String>
+
+    @GET("doctor_treatments/{doctor_id}")
+    fun getMyTreatments(
+            @Path("doctor_id") doctor_id: Long?
+    ): Call<List<Treatment>>
 }
 

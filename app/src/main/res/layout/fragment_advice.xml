@@ -99,7 +99,6 @@
             android:paddingVertical="10dp"
             android:textColorHighlight="@color/medicana_light"
             android:textColorLink="@color/medicana_light"
-            android:textCursorDrawable="@drawable/ic_cursor"
             android:textSize="16sp" />
 
         <ImageView

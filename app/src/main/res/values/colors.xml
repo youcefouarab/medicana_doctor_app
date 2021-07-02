@@ -12,5 +12,6 @@
     <color name="medicana_light">#FF4C4C</color>
     <color name="medicana_gray">#8C8C8C</color>
     <color name="medicana_lightgray">#DDDDDD</color>
+    <color name="medicana_lightestgray">#F8F8F8</color>
     <color name="medicana_accent">#FB4222</color>
 </resources>

@@ -140,3 +140,16 @@ fun displayTimeFromUnix(date_time: Long): String {
 fun unixTimestamp(): Long {
     return System.currentTimeMillis() / 1000L
 }
+
+fun jsonDateFromUnix(date_time: Long): String {
+    val pattern = "yyyy-MM-dd"
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        LocalDateTime.ofInstant(
+                Instant.ofEpochSecond(date_time),
+                TimeZone.getDefault().toZoneId()
+        ).format(DateTimeFormatter.ofPattern(pattern))
+    } else {
+        //TODO
+        ""
+    }
+}
