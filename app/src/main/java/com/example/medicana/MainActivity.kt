@@ -78,10 +78,6 @@ class MainActivity : AppCompatActivity() {
                 VM.vm.appointCurr = 0
                 navController(this).navigate(R.id.appointmentsFragment)
             }
-            else -> {
-                VM.vm.appointCurr = 0
-                navController(this).navigate(R.id.appointmentsFragment)
-            }
         }
     }
 
