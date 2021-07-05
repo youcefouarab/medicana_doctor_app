@@ -29,7 +29,7 @@ class AppointmentAdapter(val context: Context, val data: List<MyAppointment>): R
     override fun onBindViewHolder(holder: AppointmentViewHolder, position: Int) {
         holder.appointmentsPatientName.text = data[position].first_name + " " + data[position].last_name
         holder.appointmentsDate.text = displayDate(data[position].date!!)
-        holder.appointmentsTime.text = data[position].time.toString()
+        holder.appointmentsTime.text = data[position].start_time.toString()
 
         holder.itemView.setOnClickListener{
             vm.myAppointment = data[position]

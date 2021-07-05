@@ -3,9 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 
-    <gradient android:startColor="@color/medicana"
-        android:endColor="@color/medicana_accent"
-        android:angle="@dimen/angle_tilted" />
+    <solid android:color="@color/medicana" />
 
     <corners
         android:topLeftRadius="@dimen/radius_big"

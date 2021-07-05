@@ -14,8 +14,6 @@
         <item name="materialCalendarFullscreenTheme">@style/ThemeOverlay.MaterialComponents.MaterialCalendar.Fullscreen</item>
         <item name="materialCalendarTheme">@style/ThemeOverlay.MaterialComponents.MaterialCalendar</item>
 
-
-        <item name="android:statusBarColor">@color/black</item>
     </style>
     <style name="fullRoundEdge">
         <item name="cornerFamily">rounded</item>
@@ -33,4 +31,13 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">@dimen/radius_small</item>
     </style>
+
+    <style name="ToolbarBack" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/medicana</item>
+    </style>
+
+    <style name="ToolbarBackWhite" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
 </resources>

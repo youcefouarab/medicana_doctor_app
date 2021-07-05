@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "47805880799",
+    "project_id": "medicana-26077",
+    "storage_bucket": "medicana-26077.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47805880799:android:08989444f553502f1fcc6a",
+        "android_client_info": {
+          "package_name": "com.example.medicanafordoctors"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "47805880799-k33nlu295f2qo3lihfnkhraaodqq5bmu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9nXV2KOA_cPjmiAX1L6Yy3Z0URj0TIYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "47805880799-k33nlu295f2qo3lihfnkhraaodqq5bmu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47805880799:android:b40ef5ef24fda7051fcc6a",
+        "android_client_info": {
+          "package_name": "com.example.medicanaforpatients"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "47805880799-k33nlu295f2qo3lihfnkhraaodqq5bmu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9nXV2KOA_cPjmiAX1L6Yy3Z0URj0TIYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "47805880799-k33nlu295f2qo3lihfnkhraaodqq5bmu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

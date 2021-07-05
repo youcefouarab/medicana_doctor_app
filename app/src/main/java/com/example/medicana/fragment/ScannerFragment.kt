@@ -33,10 +33,16 @@ class ScannerFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         val connected = SharedPrefs(act).connected
-        return if (connected) {
-            inflater.inflate(R.layout.fragment_scanner, container, false)
-        } else {
+        return if (!connected) {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                act.window.statusBarColor = ContextCompat.getColor(act, R.color.white)
+            }
             inflater.inflate(R.layout.layout_need_auth, container, false)
+        } else {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                act.window.statusBarColor = ContextCompat.getColor(act, R.color.medicana)
+            }
+            inflater.inflate(R.layout.fragment_scanner, container, false)
         }
     }
 

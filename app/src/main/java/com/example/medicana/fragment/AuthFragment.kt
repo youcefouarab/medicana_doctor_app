@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.navigation.ui.setupWithNavController
 import com.example.medicana.prefs.SharedPrefs
 import com.example.medicana.R
@@ -16,6 +17,8 @@ import com.example.medicana.retrofit.RetrofitService
 import com.example.medicana.room.RoomService
 import com.example.medicana.util.checkFailure
 import com.example.medicana.util.navController
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_auth.*
 import retrofit2.Call
@@ -45,6 +48,10 @@ class AuthFragment : Fragment() {
         auth_toolbar?.setupWithNavController(navController(act))
         auth_toolbar?.title = ""
 
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            act.window.statusBarColor = ContextCompat.getColor(act, R.color.white)
+        }
+
         auth_login_button?.setOnClickListener {
             if ((auth_phone.text.isNotEmpty()) && (auth_password.text.isNotEmpty())) {
                 val phone = auth_phone.text.toString()
@@ -71,6 +78,9 @@ class AuthFragment : Fragment() {
                                 prefs.photo = doctor.photo
                                 prefs.specialty = doctor.specialty
                                 reloadRoomDatabase(doctor.doctor_id)
+                                registerToken(doctor.doctor_id)
+                                subscribeToAppointments(doctor.doctor_id)
+                                subscribeToAdvice(doctor.doctor_id)
                                 Toast.makeText(act, R.string.welcome, Toast.LENGTH_LONG).show()
                                 navController(act).navigateUp()
                             } else {
@@ -185,6 +195,64 @@ class AuthFragment : Fragment() {
             }
         })
 
+    }
+
+    private fun registerToken(doctor_id: Long) {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("firebase", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            } else {
+                val call = RetrofitService.endpoint.registerToken(
+                    user_id = doctor_id,
+                    token = task.result
+                )
+                call.enqueue(object : Callback<Long> {
+                    override fun onResponse(
+                        call: Call<Long>?,
+                        response: Response<Long>?
+                    ) {
+                        if (response?.isSuccessful!!) {
+                            val prefs = SharedPrefs(act)
+                            prefs.deviceId = response.body()!!
+                            prefs.token = task.result
+                        } else {
+                            checkFailure(act)
+                        }
+                    }
+
+                    override fun onFailure(call: Call<Long>?, t: Throwable?) {
+                        Log.e("Retrofit error", t.toString())
+                        checkFailure(act)
+                    }
+                })
+            }
+        })
+
+    }
+
+    private fun subscribeToAppointments(doctor_id: Long) {
+        FirebaseMessaging.getInstance().subscribeToTopic("appointments-for-$doctor_id")
+            .addOnCompleteListener { task ->
+                var msg = "subscribed"
+                if (!task.isSuccessful) {
+                    msg = "not subscribed"
+                }
+                Log.d("firebase", msg)
+                //Toast.makeText(act, msg, Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun subscribeToAdvice(doctor_id: Long) {
+        FirebaseMessaging.getInstance().subscribeToTopic("ask-advice-from-$doctor_id")
+            .addOnCompleteListener { task ->
+                var msg = "subscribed"
+                if (!task.isSuccessful) {
+                    msg = "not subscribed"
+                }
+                Log.d("firebase", msg)
+                //Toast.makeText(act, msg, Toast.LENGTH_SHORT).show()
+            }
     }
 
 }

@@ -7,4 +7,6 @@ import com.example.medicana.entity.Patient
 class MainViewModel : ViewModel() {
     var patient: Patient? = null
     var myAppointment: MyAppointment? = null
+
+    var appointCurr = 0
 }

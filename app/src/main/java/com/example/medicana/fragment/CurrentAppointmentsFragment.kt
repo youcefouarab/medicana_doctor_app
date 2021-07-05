@@ -16,14 +16,14 @@ import com.example.medicana.prefs.SharedPrefs
 import com.example.medicana.retrofit.RetrofitService
 import com.example.medicana.room.RoomService
 import com.example.medicana.util.checkFailure
-import kotlinx.android.synthetic.main.fragment_old_appointments.*
+import kotlinx.android.synthetic.main.fragment_current_appointments.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
-class OldAppointmentsFragment : Fragment() {
+class CurrentAppointmentsFragment : Fragment() {
 
     private lateinit var act: Activity
 
@@ -32,23 +32,22 @@ class OldAppointmentsFragment : Fragment() {
         act = requireActivity()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_old_appointments, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_current_appointments, container, false)
     }
 
     @SuppressLint("SimpleDateFormat")
     override fun onResume() {
         super.onResume()
 
-        old_appointments_list?.layoutManager = LinearLayoutManager(act)
+        current_appointments_list?.layoutManager = LinearLayoutManager(act)
 
         val date = SimpleDateFormat("yyyy-MM-dd").format(Date())
         val time = SimpleDateFormat("HH:mm").format(Date())
 
-        old_appointments_list?.adapter = AppointmentAdapter(act, RoomService.appDatabase.getAppointmentDao().getMyOldAppointments(date + "T00:00:00.000Z", time))
+        current_appointments_list?.adapter = AppointmentAdapter(act, RoomService.appDatabase.getAppointmentDao().getMyCurrentAppointments(date + "T00:00:00.000Z", time))
 
         val call = RetrofitService.endpoint.getMyAppointments(SharedPrefs(act).doctorId)
         call.enqueue(object : Callback<List<Appointment>> {
@@ -59,9 +58,9 @@ class OldAppointmentsFragment : Fragment() {
                 if (response?.isSuccessful!!) {
                     RoomService.appDatabase.getAppointmentDao().deleteAll()
                     RoomService.appDatabase.getAppointmentDao().addMyAppointments(response.body()!!)
-                    old_appointments_list?.adapter = AppointmentAdapter(
+                    current_appointments_list?.adapter = AppointmentAdapter(
                         act,
-                        RoomService.appDatabase.getAppointmentDao().getMyOldAppointments(
+                        RoomService.appDatabase.getAppointmentDao().getMyCurrentAppointments(
                             date + "T00:00:00.000Z",
                             time
                         )
@@ -76,6 +75,7 @@ class OldAppointmentsFragment : Fragment() {
                 checkFailure(act)
             }
         })
-
     }
+
+
 }

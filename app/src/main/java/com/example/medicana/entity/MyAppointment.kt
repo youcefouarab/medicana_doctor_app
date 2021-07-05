@@ -12,7 +12,8 @@ data class MyAppointment(
     //appointment info
     val appointment_id: Long?,
     val date: String?,
-    val time: String?,
+    val start_time: String?,
+    val finish_time: String?,
     //treatment info
     val treatment_id: Long?,
     val start_date: String?,

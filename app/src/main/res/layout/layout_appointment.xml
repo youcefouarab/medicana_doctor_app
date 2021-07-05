@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="8dp"
-    android:background="@drawable/bg_rounded_white"
+    android:background="@drawable/bg_rounded_white_small"
     android:elevation="@dimen/elevation"
     tools:ignore="UnusedAttribute">
 
@@ -19,10 +19,27 @@
         android:layout_marginLeft="16dp"
         android:text="TextView"
         android:singleLine="true"
-        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/imageView5"
         app:layout_constraintTop_toTopOf="@+id/imageView5"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:singleLine="true"
+        android:text="-"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/appointments_date"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/appointments_date"
+        app:layout_constraintTop_toTopOf="@+id/appointments_date"
         tools:ignore="HardcodedText" />
 
 
@@ -33,13 +50,14 @@
         android:layout_marginHorizontal="16dp"
         android:singleLine="true"
         android:text="TextView"
-        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/appointments_date"
+        app:layout_constraintBottom_toBottomOf="@+id/line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/appointments_date"
-        app:layout_constraintTop_toTopOf="@+id/appointments_date"
+        app:layout_constraintStart_toEndOf="@+id/line"
+        app:layout_constraintTop_toTopOf="@+id/line"
         tools:ignore="HardcodedText" />
 
     <ImageView
@@ -62,6 +80,8 @@
         android:layout_marginHorizontal="16dp"
         android:singleLine="true"
         android:text="TextView"
+        android:textColor="@color/medicana_gray"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

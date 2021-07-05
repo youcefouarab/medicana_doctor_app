@@ -4,62 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.ScannerFragment">
+    android:background="@color/medicana"
+    tools:context=".fragment.AdvicesFragment">
 
-    <FrameLayout
-        android:id="@+id/scanner_sheet"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_top_sheet"
-        android:elevation="@dimen/elevation"
+        android:layout_margin="32dp"
+        android:text="@string/give_advice_to_your_patients"
+        android:textColor="@color/white"
+        android:textSize="@dimen/medium_title"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="UnusedAttribute">
+        app:layout_constraintBottom_toTopOf="@id/scan_layout"/>
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="16dp"
-            android:textStyle="bold"
-            android:text="@string/scan_a_qr"
-            android:textColor="@color/white"
-            android:textSize="@dimen/medium_title"/>
-
-    </FrameLayout>
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/scan_layout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="vertical"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scanner_sheet"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
         tools:ignore="UseCompoundDrawables">
 
         <ImageView
-        android:id="@+id/scanner_btn"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center|top"
-        app:srcCompat="@drawable/ic_scan"
-        android:contentDescription="Scanner"
-        tools:ignore="HardcodedText" />
+            android:id="@+id/scanner_btn"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:contentDescription="Scanner"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_scan"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center|top"
+            android:layout_gravity="center"
+            android:text="@string/click_to_scan"
             android:textColor="@color/medicana_light"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:textSize="24sp"
-            android:text="@string/click_to_scan"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scanner_btn" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

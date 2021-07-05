@@ -4,33 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/medicana"
     tools:context=".fragment.AdvicesFragment">
 
-    <FrameLayout
-        android:id="@+id/advices_sheet"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_top_sheet"
-        android:elevation="@dimen/elevation"
+        android:layout_margin="32dp"
+        android:text="@string/give_advice_to_your_patients"
+        android:textColor="@color/white"
+        android:textSize="@dimen/medium_title"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="UnusedAttribute">
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="16dp"
-            android:textStyle="bold"
-            android:text="@string/give_advice_to_your_patients"
-            android:textColor="@color/white"
-            android:textSize="@dimen/medium_title"/>
-
-
-    </FrameLayout>
+        app:layout_constraintBottom_toTopOf="@id/advices_patients_list"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/advices_patients_list"
@@ -38,11 +27,12 @@
         android:layout_height="0dp"
         android:clipToPadding="false"
         android:paddingVertical="16dp"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/advices_sheet" />
+        app:layout_constraintTop_toBottomOf="@id/textView5" />
 
 
 

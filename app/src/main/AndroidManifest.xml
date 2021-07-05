@@ -8,6 +8,8 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
     <uses-sdk tools:overrideLibrary="androidx.camera.view, androidx.camera.camera2, androidx.camera.lifecycle, androidx.camera.core"/>
 
     <application
@@ -20,17 +22,36 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleTop"
             android:theme="@style/Medicana" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.SEARCH" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <service
+            android:name=".service.NotificationService"
+            android:permission="com.google.android.c2dm.permission.SEND"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_launcher" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/medicana" />
     </application>
 
 </manifest>

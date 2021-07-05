@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_nav_host_to_cameraFragment"
             app:destination="@id/cameraFragment" />
+        <action
+            android:id="@+id/action_nav_host_to_appointmentsFragment"
+            app:destination="@id/appointmentsFragment" />
     </fragment>
     <fragment
         android:id="@+id/authFragment"

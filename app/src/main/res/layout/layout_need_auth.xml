@@ -3,11 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/need_auth_toolbar"
         android:layout_width="0dp"
         android:layout_height="@dimen/toolbar_height"
+        android:theme="@style/ToolbarBack"
         android:background="@color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +39,7 @@
             android:id="@+id/need_auth_button"
             android:layout_width="match_parent"
             android:layout_height="@dimen/button_height"
-            android:background="@drawable/bg_rounded"
+            android:background="@drawable/bg_rounded_small"
             android:text="@string/auth_login"
             android:textStyle="bold"
             android:textColor="@color/white"/>

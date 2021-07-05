@@ -4,16 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/medicana"
     tools:context=".MainActivity">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_bottom"
         android:layout_width="0dp"
         android:layout_height="@dimen/bottom_height"
-        android:background="@drawable/bg_bottom_sheet_white"
         app:menu="@menu/bottom_menu"
+        android:background="@color/medicana"
         app:itemIconTint="@color/bottom_nav"
         app:itemTextColor="@color/bottom_nav"
+        app:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

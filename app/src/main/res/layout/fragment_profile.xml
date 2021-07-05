@@ -10,20 +10,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragment.ProfileFragment"
-        android:background="@drawable/bg_full_medicana">
+        android:background="@color/medicana">
 
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="128dp"
+            android:background="@color/white"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UnusedAttribute" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/profile_photo"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:layout_marginTop="@dimen/toolbar_height"
+            app:strokeWidth="@dimen/edge_stoke_width"
+            app:strokeColor="@color/medicana"
+            android:padding="@dimen/edge_stoke_width"
             android:background="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/bigRoundEdge"
-            tools:srcCompat="@tools:sample/avatars"/>
+            app:layout_constraintTop_toTopOf="@+id/linearLayout4"
+            app:shapeAppearanceOverlay="@style/fullRoundEdge"
+            tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/profile_name"
@@ -32,7 +48,7 @@
             android:layout_marginTop="12dp"
             android:singleLine="true"
             android:text="TextView"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="@+id/profile_photo"
@@ -46,40 +62,19 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="TextView"
-            android:textColor="@color/white"
+            android:textColor="@color/medicana_gray"
             android:singleLine="true"
             app:layout_constraintEnd_toEndOf="@+id/profile_name"
             app:layout_constraintStart_toStartOf="@+id/profile_name"
             app:layout_constraintTop_toBottomOf="@+id/profile_name"
             tools:ignore="HardcodedText" />
 
-
-        <LinearLayout
-            android:id="@+id/profile_sheet"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@drawable/bg_bottom_sheet_white"
-            android:orientation="vertical"
-            android:elevation="@dimen/elevation"
-            android:layout_marginTop="32dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_phone"
-            tools:ignore="UnusedAttribute">
-
-
-
-
-        </LinearLayout>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
         android:visibility="gone"
         android:id="@+id/dimmed_bg"
-        android:background="#99000000"
+        android:background="@drawable/bg_dimmed"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
@@ -114,7 +109,7 @@
                 android:layout_marginHorizontal="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="32dp"
-                android:background="@drawable/bg_rounded_white"
+                android:background="@drawable/bg_rounded_white_small"
                 android:text="@string/confirm"
                 android:textStyle="bold"
                 android:textColor="@color/medicana" />

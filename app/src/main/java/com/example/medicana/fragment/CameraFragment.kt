@@ -119,7 +119,8 @@ class CameraFragment : Fragment() {
                                     appointment_id = vm.myAppointment?.appointment_id,
                                     patient_id = vm.myAppointment?.patient_id,
                                     date = vm.myAppointment?.date,
-                                    time = vm.myAppointment?.time
+                                    start_time = vm.myAppointment?.start_time,
+                                    finish_time = vm.myAppointment?.finish_time
                                 )
                             )
                             if (vm.myAppointment != null) {

@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
@@ -44,14 +45,18 @@ class AppointmentFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View
         val connected = SharedPrefs(act).connected
-        view = if (connected) {
-            inflater.inflate(R.layout.fragment_appointment, container, false)
-        } else {
+        return if (!connected) {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                act.window.statusBarColor = ContextCompat.getColor(act, R.color.white)
+            }
             inflater.inflate(R.layout.layout_need_auth, container, false)
+        } else {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                act.window.statusBarColor = ContextCompat.getColor(act, R.color.medicana)
+            }
+            inflater.inflate(R.layout.fragment_appointment, container, false)
         }
-        return view
     }
 
     @SuppressLint("SetTextI18n")
@@ -90,7 +95,7 @@ class AppointmentFragment : Fragment() {
             }
 
             appointment_date?.text = displayDate(myAppointment.date!!)
-            appointment_time?.text = myAppointment.time
+            appointment_time?.text = myAppointment.start_time
 
             if (myAppointment.treatment_id != null) {
                 toggleButtonsAndEdittexts(false)
@@ -109,7 +114,8 @@ class AppointmentFragment : Fragment() {
                                 jsonDateFromUnix(startDate!!),
                                 jsonDateFromUnix(finishDate!!),
                                 treatment_description?.text.toString(),
-                                myAppointment.appointment_id
+                                myAppointment.appointment_id,
+                                myAppointment.patient_id
                         )
                         call.enqueue(object : Callback<String> {
                             override fun onResponse(

@@ -41,17 +41,36 @@ interface Endpoint {
             @Path("doctor_id") doctor_id: Long?
     ): Call<List<Advice>>
 
-    @POST("prescribe_treatment/{start_date}/{finish_date}/{description}/{appointment_id}")
+    @POST("register/{user_type}/{user_id}/{token}")
+    fun registerToken(
+        @Path("user_type") user_type: String? = "doctor",
+        @Path("user_id") user_id: Long?,
+        @Path("token") token: String?
+    ): Call<Long>
+
+    @DELETE("unregister/{device_id}")
+    fun unregisterToken(
+        @Path("device_id") device_id: Long?
+    ): Call<String>
+
+    @POST("prescribe_treatment/{start_date}/{finish_date}/{description}/{appointment_id}/{patient_id}")
     fun prescribeTreatment(
             @Path("start_date") start_date: String?,
             @Path("finish_date") finish_date: String?,
             @Path("description") description: String?,
-            @Path("appointment_id") appointment_id: Long?
+            @Path("appointment_id") appointment_id: Long?,
+            @Path("patient_id") patient_id: Long?
     ): Call<String>
 
     @GET("doctor_treatments/{doctor_id}")
     fun getMyTreatments(
             @Path("doctor_id") doctor_id: Long?
     ): Call<List<Treatment>>
+
+    @GET("advice_with_patient/{patient_id}/{doctor_id}")
+    fun getAdviceWithPatient(
+        @Path("patient_id") patient_id: Long?,
+        @Path("doctor_id") doctor_id: Long?
+    ): Call<List<Advice>>
 }
 

@@ -8,10 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00FFFFFF</color>
-    <color name="medicana">#EC2323</color>
-    <color name="medicana_light">#FF4C4C</color>
+
+    <color name="medicana">#FF5151</color>
+    <color name="medicana_light">#FF5151</color>
+    <color name="medicana_accent">#551C1C</color>
+
     <color name="medicana_gray">#8C8C8C</color>
     <color name="medicana_lightgray">#DDDDDD</color>
     <color name="medicana_lightestgray">#F8F8F8</color>
-    <color name="medicana_accent">#FB4222</color>
 </resources>

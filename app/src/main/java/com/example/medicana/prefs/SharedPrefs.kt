@@ -17,6 +17,8 @@ class SharedPrefs(context: Context) {
         private const val KEY_GENDER = "gender"
         private const val KEY_PHOTO = "photo"
         private const val KEY_SPECIALTY = "specialty"
+        private const val KEY_DEVICE_ID = "device_id"
+        private const val KEY_TOKEN = "token"
     }
 
     private val sharedPrefs: SharedPreferences =
@@ -57,5 +59,13 @@ class SharedPrefs(context: Context) {
     var specialty: String?
         get() = sharedPrefs.getString(KEY_SPECIALTY, "") ?: ""
         set(value) = sharedPrefs.edit { putString(KEY_SPECIALTY, value) }
+
+    var deviceId: Long
+        get() = sharedPrefs.getLong(KEY_DEVICE_ID, 0)
+        set(value) = sharedPrefs.edit { putLong(KEY_DEVICE_ID, value) }
+
+    var token: String?
+        get() = sharedPrefs.getString(KEY_TOKEN, "") ?: ""
+        set(value) = sharedPrefs.edit { putString(KEY_TOKEN, value) }
 
 }

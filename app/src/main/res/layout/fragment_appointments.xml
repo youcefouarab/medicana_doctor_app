@@ -6,45 +6,56 @@
     android:layout_height="match_parent"
     tools:context=".fragment.AppointmentsFragment">
 
-    <FrameLayout
-        android:id="@+id/appointments_sheet"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_top_sheet"
-        android:elevation="@dimen/elevation"
+        android:layout_margin="32dp"
+        android:text="@string/my_appointments"
+        android:textColor="@color/white"
+        android:textSize="@dimen/medium_title"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="UnusedAttribute">
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginHorizontal="32dp"
-            android:textStyle="bold"
-            android:text="@string/my_appointments"
-            android:textColor="@color/white"
-            android:textSize="@dimen/medium_title"/>
+        app:layout_constraintBottom_toTopOf="@id/tabs"/>
 
 
-    </FrameLayout>
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabTextColor="@color/medicana_gray"
+        app:tabIndicatorColor="@color/medicana"
+        app:tabSelectedTextColor="@color/medicana"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView5"
+        app:layout_constraintBottom_toTopOf="@id/appointments_framelayout">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/appointments_list"
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="@string/current" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="@string/old" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+
+    <FrameLayout
+        android:id="@+id/appointments_framelayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:clipToPadding="false"
-        android:paddingVertical="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabs"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appointments_sheet" />
+        />
 
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -30,4 +30,13 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">@dimen/radius_small</item>
     </style>
+
+    <style name="ToolbarBack" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/medicana</item>
+    </style>
+
+    <style name="ToolbarBackWhite" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
 </resources>

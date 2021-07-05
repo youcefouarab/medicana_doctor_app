@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.AuthFragment">
 
@@ -10,6 +11,7 @@
             android:id="@+id/auth_toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/toolbar_height"
+            android:theme="@style/ToolbarBack"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -31,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/text_field_height"
                 android:layout_marginVertical="10dp"
-                android:background="@drawable/bg_rounded_edge"
+                android:background="@drawable/bg_rounded_edge_small"
                 app:drawableEndCompat="@drawable/ic_phone"
                 app:drawableRightCompat="@drawable/ic_phone"
                 android:hint="@string/auth_phone_number"
@@ -50,7 +52,7 @@
                 android:layout_height="@dimen/text_field_height"
                 android:layout_marginVertical="10dp"
                 android:autofillHints=""
-                android:background="@drawable/bg_rounded_edge"
+                android:background="@drawable/bg_rounded_edge_small"
                 app:drawableEndCompat="@drawable/ic_lock"
                 app:drawableRightCompat="@drawable/ic_lock"
                 android:hint="@string/auth_password"
@@ -67,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:layout_marginVertical="10dp"
-                android:background="@drawable/bg_rounded"
+                android:background="@drawable/bg_rounded_small"
                 android:text="@string/auth_login"
                 android:textStyle="bold"
                 android:textColor="@color/white" />
@@ -101,6 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textColor="@color/medicana"
             android:text="@string/app_subtitle"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="@+id/auth_app_name"
