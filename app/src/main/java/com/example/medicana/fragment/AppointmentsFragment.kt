@@ -2,29 +2,19 @@ package com.example.medicana.fragment
 
 import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.medicana.R
-import com.example.medicana.adapter.AppointmentAdapter
-import com.example.medicana.entity.Appointment
 import com.example.medicana.prefs.SharedPrefs
-import com.example.medicana.retrofit.RetrofitService
-import com.example.medicana.room.RoomService
-import com.example.medicana.util.checkFailure
 import com.example.medicana.util.navController
 import com.example.medicana.viewmodel.VM
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_appointments.*
 import kotlinx.android.synthetic.main.layout_need_auth.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class AppointmentsFragment : Fragment() {
 
@@ -59,7 +49,6 @@ class AppointmentsFragment : Fragment() {
 
         if (tabs != null) {
             selectTab(VM.vm.appointCurr)
-
             tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     selectTab(tab?.position)

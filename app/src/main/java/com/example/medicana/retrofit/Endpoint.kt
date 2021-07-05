@@ -5,6 +5,7 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface Endpoint {
+
     @GET("doctor_appointments/{doctor_id}")
     fun getMyAppointments(
         @Path("doctor_id") doctor_id: Long?

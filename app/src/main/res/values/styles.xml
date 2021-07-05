@@ -7,7 +7,7 @@
 
         <item name="colorPrimary">@color/medicana</item>
         <item name="colorPrimaryDark">@color/medicana</item>
-        <item name="colorAccent">@color/medicana_accent</item>
+        <item name="colorAccent">@color/medicana</item>
 
         <item name="materialCalendarStyle">@style/Widget.MaterialComponents.MaterialCalendar</item>
         <item name="materialCalendarFullscreenTheme">@style/ThemeOverlay.MaterialComponents.MaterialCalendar.Fullscreen</item>

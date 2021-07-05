@@ -19,5 +19,4 @@ data class MyAppointment(
     val start_date: String?,
     val finish_date: String?,
     val description: String?
-
 ): Serializable

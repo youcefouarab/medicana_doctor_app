@@ -28,14 +28,13 @@ class AdviceAddSyncService(ctx: Context, workParameters: WorkerParameters): List
     }
 
     private fun syncAdvice(advice: List<Advice>) {
-
         val result = RetrofitService.endpoint.giveAdvice(advice)
         result.enqueue(object: Callback<String> {
             override fun onFailure(call: Call<String>?, t: Throwable?) {
                 future.set(Result.retry())
             }
             override fun onResponse(call: Call<String>?, response: Response<String>?) {
-                if (response?.isSuccessful!!) {
+                if (response?.isSuccessful == true) {
                     if (response.body() == RES_SUCCESS) {
                         for (item in advice) {
                             item.is_sync = 1

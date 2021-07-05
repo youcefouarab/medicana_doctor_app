@@ -17,11 +17,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_scanner.*
 import kotlinx.android.synthetic.main.layout_need_auth.*
 
-private const val CAMERA_REQUEST_CODE = 101
-
 class ScannerFragment : Fragment() {
 
     private lateinit var act: Activity
+    private val cameraRequestCode = 101
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,7 +68,7 @@ class ScannerFragment : Fragment() {
     }
 
     private fun makeRequest() {
-        ActivityCompat.requestPermissions(act, arrayOf(android.Manifest.permission.CAMERA), CAMERA_REQUEST_CODE)
+        ActivityCompat.requestPermissions(act, arrayOf(android.Manifest.permission.CAMERA), cameraRequestCode)
     }
 
     override fun onRequestPermissionsResult(
@@ -78,9 +77,9 @@ class ScannerFragment : Fragment() {
         grantResults: IntArray
     ) {
         when (requestCode) {
-            CAMERA_REQUEST_CODE -> {
+            cameraRequestCode -> {
                 if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(act, "You need camera permission!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(act, R.string.need_camera_permission, Toast.LENGTH_SHORT).show()
                 } else {
                     navController(act).navigate(R.id.action_nav_host_to_cameraFragment)
                 }

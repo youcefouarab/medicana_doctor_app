@@ -7,10 +7,10 @@ import com.example.medicana.entity.Treatment
 interface TreatmentDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addTreatment(treatment: Treatment)
+    fun addTreatment(treatment: Treatment?)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addMyTreatments(treatments: List<Treatment>)
+    fun addMyTreatments(treatments: List<Treatment?>?)
 
     @Query("DELETE FROM treatment")
     fun deleteAll()

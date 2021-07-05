@@ -3,9 +3,9 @@ package com.example.medicana
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.NavigationUI
-import com.example.medicana.fragment.AppointmentsFragment
 import com.example.medicana.util.NOTIFICATION
 import com.example.medicana.util.navController
 import com.example.medicana.viewmodel.VM
@@ -20,6 +20,16 @@ class MainActivity : AppCompatActivity() {
         VM.context = this
 
         setContentView(R.layout.activity_main)
+
+        when (this.intent.getStringExtra(NOTIFICATION)) {
+            "advice" -> {
+                navController(this).navigate(R.id.advicesFragment)
+            }
+            "appointment" -> {
+                VM.vm.appointCurr = 0
+                navController(this).navigate(R.id.appointmentsFragment)
+            }
+        }
 
         NavigationUI.setupWithNavController(nav_bottom, navController(this))
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -60,8 +70,19 @@ class MainActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         setIntent(intent)
-        //navController(this).navigate(R.id.action_nav_host_to_appointmentsFragment)
-        //What if we're in a different fragment (not nav_host)??
+        when (this.intent.getStringExtra(NOTIFICATION)) {
+            "advice" -> {
+                navController(this).navigate(R.id.advicesFragment)
+            }
+            "appointment" -> {
+                VM.vm.appointCurr = 0
+                navController(this).navigate(R.id.appointmentsFragment)
+            }
+            else -> {
+                VM.vm.appointCurr = 0
+                navController(this).navigate(R.id.appointmentsFragment)
+            }
+        }
     }
 
 

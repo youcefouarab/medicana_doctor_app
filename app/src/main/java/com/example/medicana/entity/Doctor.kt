@@ -17,5 +17,4 @@ data class Doctor (
     val specialty: String?,
     val longitude: Double?,
     val latitude: Double?
-
 ): Serializable

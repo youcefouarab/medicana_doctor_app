@@ -10,6 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:background="@color/white"
+        android:background="@color/medicana_lightestgray"
         android:paddingVertical="16dp" />
 </FrameLayout>

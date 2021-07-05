@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -14,6 +15,7 @@ import java.text.DateFormatSymbols
 import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.*
 
@@ -51,25 +53,28 @@ fun navController(activity: Activity): NavController {
     return navHostFragment.navController
 }
 
-fun checkFailure(context: Context) {
+fun checkFailure(context: Context, t: Throwable?) {
     if (isOnline(context)) {
         Toast.makeText(
-            context,
-            R.string.error,
-            Toast.LENGTH_SHORT
+                context,
+                R.string.error,
+                Toast.LENGTH_SHORT
         ).show()
     } else {
         Toast.makeText(
-            context,
-            R.string.internet_error,
-            Toast.LENGTH_SHORT
+                context,
+                R.string.internet_error,
+                Toast.LENGTH_SHORT
         ).show()
+    }
+    if (t != null) {
+        Log.e("Retrofit error", t.toString())
     }
 }
 
 fun displayDate(date: String): String {
     val day = date.slice(IntRange(8, 9))
-    val month = DateFormatSymbols().months.get(date.slice(IntRange(5, 6)).toInt() - 1)
+    val month = DateFormatSymbols().months[date.slice(IntRange(5, 6)).toInt() - 1]
     val year = date.slice(IntRange(0, 3))
     val lang = Locale.getDefault().language
     return if (LocalDate.now().year.toString() == year) {
@@ -90,15 +95,10 @@ fun displayDate(date: String): String {
 
 fun displayDateFromUnix(date_time: Long): String {
     val lang = Locale.getDefault().language
-    val year = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        LocalDateTime.ofInstant(
-            Instant.ofEpochSecond(date_time),
-            TimeZone.getDefault().toZoneId()
-        ).format(DateTimeFormatter.ofPattern("yyyy"))
-    } else {
-        //TODO
-        ""
-    }
+    val year = LocalDateTime.ofInstant(
+            Instant.ofEpochMilli(date_time * 1000),
+            ZoneId.systemDefault()
+    ).format(DateTimeFormatter.ofPattern("yyyy"))
     val pattern = if (LocalDate.now().year.toString() == year) {
         if (lang == "en") {
             "MMM d"
@@ -112,28 +112,18 @@ fun displayDateFromUnix(date_time: Long): String {
             "d MMM yyyy"
         }
     }
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        LocalDateTime.ofInstant(
-            Instant.ofEpochSecond(date_time),
-            TimeZone.getDefault().toZoneId()
-        ).format(DateTimeFormatter.ofPattern(pattern))
-    } else {
-        //TODO
-        ""
-    }
+    return LocalDateTime.ofInstant(
+            Instant.ofEpochMilli(date_time * 1000),
+            ZoneId.systemDefault()
+    ).format(DateTimeFormatter.ofPattern(pattern))
 
 }
 
 fun displayTimeFromUnix(date_time: Long): String {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        LocalDateTime.ofInstant(
-            Instant.ofEpochSecond(date_time),
-            TimeZone.getDefault().toZoneId()
-        ).format(DateTimeFormatter.ofPattern("HH:mm"))
-    } else {
-        //TODO
-        ""
-    }
+    return LocalDateTime.ofInstant(
+            Instant.ofEpochMilli(date_time * 1000),
+            ZoneId.systemDefault()
+    ).format(DateTimeFormatter.ofPattern("HH:mm"))
 }
 
 
@@ -142,14 +132,8 @@ fun unixTimestamp(): Long {
 }
 
 fun jsonDateFromUnix(date_time: Long): String {
-    val pattern = "yyyy-MM-dd"
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        LocalDateTime.ofInstant(
-                Instant.ofEpochSecond(date_time),
-                TimeZone.getDefault().toZoneId()
-        ).format(DateTimeFormatter.ofPattern(pattern))
-    } else {
-        //TODO
-        ""
-    }
+    return LocalDateTime.ofInstant(
+            Instant.ofEpochMilli(date_time * 1000),
+            ZoneId.systemDefault()
+    ).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
 }

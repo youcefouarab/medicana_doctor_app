@@ -36,7 +36,7 @@ class AdviceUpdateSyncService(private val ctx: Context, workParameters: WorkerPa
                     future.set(Result.retry())
                 }
                 override fun onResponse(call: Call<String>?, response: Response<String>?) {
-                    if (response?.isSuccessful!!) {
+                    if (response?.isSuccessful == true) {
                         if (response.body() == RES_SUCCESS) {
                             RoomService.appDatabase.getAdviceDao().updateSyncedSeenAdvice(patient_id)
                             future.set(Result.success())

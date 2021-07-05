@@ -2,14 +2,12 @@ package com.example.medicana.fragment
 
 import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.Room
 import com.example.medicana.R
 import com.example.medicana.adapter.MyPatientAdapter
 import com.example.medicana.entity.Advice
@@ -61,14 +59,13 @@ class AdvicesFragment : Fragment() {
         advices_patients_list?.adapter = MyPatientAdapter(act, RoomService.appDatabase.getPatientDao().getMyPatients())
 
         val doctorId = SharedPrefs(act).doctorId
-
         val call1 = RetrofitService.endpoint.getMyPatients(doctorId)
         call1.enqueue(object : Callback<List<Patient>> {
             override fun onResponse(
                 call: Call<List<Patient>>?,
                 response: Response<List<Patient>>?
             ) {
-                if (response?.isSuccessful!!) {
+                if (response?.isSuccessful == true) {
                     val patients = response.body()
                     val call2 = RetrofitService.endpoint.getAllAdvice(doctorId)
                     call2.enqueue(object : Callback<List<Advice>> {
@@ -76,37 +73,33 @@ class AdvicesFragment : Fragment() {
                             call: Call<List<Advice>>?,
                             response: Response<List<Advice>>?
                         ) {
-                            if (response?.isSuccessful!!) {
+                            if (response?.isSuccessful == true) {
                                 RoomService.appDatabase.getPatientDao().deleteAll()
+                                RoomService.appDatabase.getPatientDao().addMyPatients(patients)
                                 RoomService.appDatabase.getAdviceDao().deleteAll()
-                                RoomService.appDatabase.getPatientDao().addMyPatients(patients!!)
-                                RoomService.appDatabase.getAdviceDao().addMyAdvice(response.body()!!)
+                                RoomService.appDatabase.getAdviceDao().addMyAdvice(response.body())
                                 advices_patients_list?.adapter = MyPatientAdapter(act, RoomService.appDatabase.getPatientDao().getMyPatients())
                             } else {
-                                checkFailure(act)
+                                checkFailure(act, null)
                             }
                         }
 
                         override fun onFailure(call: Call<List<Advice>>?, t: Throwable?) {
-                            Log.e("Retrofit error", t.toString())
-                            checkFailure(act)
+                            checkFailure(act, t)
                         }
                     })
                 } else {
-                    checkFailure(act)
+                    checkFailure(act, null)
                 }
             }
 
             override fun onFailure(call: Call<List<Patient>>?, t: Throwable?) {
-                Log.e("Retrofit error", t.toString())
-                checkFailure(act)
+                checkFailure(act, t)
             }
         })
 
         need_auth_button?.setOnClickListener {
             navController(act).navigate(R.id.action_advicesFragment_to_authFragment)
         }
-
     }
-
 }

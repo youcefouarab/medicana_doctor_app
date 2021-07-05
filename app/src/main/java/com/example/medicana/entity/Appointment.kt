@@ -14,5 +14,4 @@ data class Appointment (
     val start_time: String?,
     val finish_time: String?,
     val treatment_id: Long? = null
-
 ): Serializable

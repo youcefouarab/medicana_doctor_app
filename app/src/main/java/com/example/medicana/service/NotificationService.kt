@@ -13,15 +13,9 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.example.medicana.MainActivity
 import com.example.medicana.R
-import com.example.medicana.prefs.SharedPrefs
-import com.example.medicana.retrofit.RetrofitService
 import com.example.medicana.util.NOTIFICATION
-import com.example.medicana.viewmodel.VM.context
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import kotlin.random.Random.Default.nextInt
 
 
@@ -33,8 +27,6 @@ class NotificationService: FirebaseMessagingService() {
     override fun onNewToken(token: String) {
         super.onNewToken(token)
         Log.d(tag, "new token : $token")
-
-        //reRegisterToken(token)
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
@@ -46,12 +38,20 @@ class NotificationService: FirebaseMessagingService() {
         }
 
         val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra(NOTIFICATION, true)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        val pendingIntent = PendingIntent.getActivity(
-            this, 100, intent,
-            PendingIntent.FLAG_UPDATE_CURRENT
-        )
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or
+                        Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+
+        when (remoteMessage.data["title"]) {
+            "Advice request" -> {
+                intent.putExtra(NOTIFICATION, "advice")
+            }
+            "New appointment" -> {
+                intent.putExtra(NOTIFICATION, "appointment")
+            }
+        }
+
+        val uniqueInt = (System.currentTimeMillis() and 0xfffffff).toInt()
+        val pendingIntent = PendingIntent.getActivity(this, uniqueInt, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val notification = NotificationCompat.Builder(this, channelId)
             .setContentTitle(remoteMessage.data["title"])
@@ -75,61 +75,4 @@ class NotificationService: FirebaseMessagingService() {
         notificationManager.createNotificationChannel(channel)
     }
 
-    private fun reRegisterToken(token: String) {
-        val prefs = SharedPrefs(context)
-        if (prefs.connected) {
-            val call1 = RetrofitService.endpoint.unregisterToken(
-                prefs.deviceId
-            )
-            call1.enqueue(object : Callback<String> {
-                override fun onResponse(
-                    call: Call<String>?,
-                    response: Response<String>?
-                ) {
-                    val call2 = RetrofitService.endpoint.registerToken(
-                        user_id = prefs.doctorId,
-                        token = token
-                    )
-                    call2.enqueue(object : Callback<Long> {
-                        override fun onResponse(
-                            call: Call<Long>?,
-                            response: Response<Long>?
-                        ) {
-                            if (response?.isSuccessful!!) {
-                                prefs.deviceId = response.body()!!
-                                prefs.token = token
-                            }
-                        }
-
-                        override fun onFailure(call: Call<Long>?, t: Throwable?) {
-                            Log.e("Retrofit error", t.toString())
-                        }
-                    })
-                }
-
-                override fun onFailure(call: Call<String>?, t: Throwable?) {
-                    Log.e("Retrofit error", t.toString())
-                    val call2 = RetrofitService.endpoint.registerToken(
-                        user_id = prefs.doctorId,
-                        token = token
-                    )
-                    call2.enqueue(object : Callback<Long> {
-                        override fun onResponse(
-                            call: Call<Long>?,
-                            response: Response<Long>?
-                        ) {
-                            if (response?.isSuccessful!!) {
-                                prefs.deviceId = response.body()!!
-                                prefs.token = token
-                            }
-                        }
-
-                        override fun onFailure(call: Call<Long>?, t: Throwable?) {
-                            Log.e("Retrofit error", t.toString())
-                        }
-                    })
-                }
-            })
-        }
-    }
 }

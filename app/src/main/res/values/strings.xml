@@ -5,41 +5,17 @@
     <string name="auth_phone_number">Phone number</string>
     <string name="auth_password">Password</string>
     <string name="auth_login">Login</string>
-    <string name="auth_welcome">Welcome</string>
-    <string name="auth_invalid">Invalid phone number or password</string>
-    <string name="menu_doctors">Doctors</string>
     <string name="menu_appointments">Appointments</string>
-    <string name="menu_treatments">Treatments</string>
     <string name="menu_advice">Advice</string>
     <string name="menu_profile">Profile</string>
-    <string name="book_appointment">Book an appointment</string>
-    <string name="cancel_appointment">Cancel appointment</string>
-    <string name="find_doctos">Find doctors and book appointments</string>
     <string name="need_auth">To continue, you need to login</string>
-    <string name="appointment_ready">Your appointment is ready now!</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
     <string name="my_appointments">Keep up with your appointments</string>
-    <string name="ask_advice">Ask your doctors for advice</string>
     <string name="ask_me">Ask me anything!</string>
-    <string name="call">Call</string>
-    <string name="directions">Directions</string>
-
-    <string name="sun">Sun</string>
-    <string name="mon">Mon</string>
-    <string name="tue">Tue</string>
-    <string name="wed">Wed</string>
-    <string name="thu">Thu</string>
-    <string name="fri">Fri</string>
-    <string name="sat">Sat</string>
-
     <string name="welcome">Welcome!</string>
-    <string name="booking_success">Your appointment has been booked!</string>
-    <string name="booking_cancel">Your appointment has been canceled!</string>
-
     <string name="error">An error has occured</string>
     <string name="internet_error">No internet</string>
-    <string name="fb_error">Facebook wasn\'t detected</string>
     <string name="login_error">Wrong phone number or password</string>
     <string name="send">Send</string>
     <string name="date">Date</string>
@@ -56,9 +32,12 @@
     <string name="scan_a_qr">Scan the QR code from your patient and start the appointment</string>
     <string name="click_to_scan">Click to scan</string>
     <string name="pick_date_range">Pick date range</string>
-
     <string name="current">Current</string>
     <string name="old">Old</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="already_prescribed">A treatment is already prescribed!</string>
+    <string name="prescribed_success">Treatment was prescribed successfully!</string>
+    <string name="describe_treatment">Please describe the treatment</string>
+    <string name="missing_phone_pass">Please login with your phone number and password</string>
+    <string name="no_appointments">No appointment belonging to you was detected</string>
+    <string name="need_camera_permission">You need the camera to continue</string>
 </resources>

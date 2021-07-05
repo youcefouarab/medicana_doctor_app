@@ -17,5 +17,4 @@ data class Advice (
         val date_time: Long? = unixTimestamp(),
         val state: String? = MESSAGE_SENT,
         var is_sync: Int? = 0
-
 ): Serializable

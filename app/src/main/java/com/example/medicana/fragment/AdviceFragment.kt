@@ -5,7 +5,6 @@ import android.app.Activity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -43,7 +42,6 @@ class AdviceFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_advice, container, false)
     }
 
@@ -51,26 +49,20 @@ class AdviceFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         act.nav_bottom?.visibility = View.GONE
-
         advice_toolbar?.setupWithNavController(navController(act))
         advice_toolbar?.title = ""
 
         val patient = vm.patient
-
-        val doctorId = SharedPrefs(act).doctorId
-
         advice_patient_name?.text = patient?.first_name + " " + patient?.last_name
-
-        //Glide.with(context).load(BASE_URL + data[position].photo).into(holder.doctors_photo)
         if (advice_patient_photo != null) {
-            Glide.with(act).load(R.drawable.default_profile).into(advice_patient_photo!!)
+            Glide.with(act).load(R.drawable.default_profile).into(advice_patient_photo)
         }
 
         advice_list?.layoutManager = LinearLayoutManager(act).apply {
             stackFromEnd = true
             reverseLayout = false
         }
-
+        advice_list?.adapter = AdviceAdapter(act, RoomService.appDatabase.getAdviceDao().getAdviceWithPatient(patient?.patient_id))
         reload(false)
         Handler(Looper.getMainLooper()).postDelayed({
             reload(true)
@@ -81,26 +73,20 @@ class AdviceFragment : Fragment() {
             if (message.isNotBlank()) {
                 advice_message_to_send?.text?.clear()
                 RoomService.appDatabase.getAdviceDao().addAdvice(
-                        Advice(
-                                doctor_id = doctorId,
-                                patient_id = patient?.patient_id,
-                                reply = message,
-                        )
+                    Advice(
+                        doctor_id = SharedPrefs(act).doctorId,
+                        patient_id = patient?.patient_id,
+                        reply = message,
+                    )
                 )
                 scheduleSync()
-                reload(false)
+                advice_list?.adapter = AdviceAdapter(act, RoomService.appDatabase.getAdviceDao().getAdviceWithPatient(patient?.patient_id))
             }
-
         }
-
     }
 
     private fun reload(withState: Boolean) {
         val patient = vm.patient
-
-        val recyclerViewState1 = advice_list?.layoutManager?.onSaveInstanceState()
-        advice_list?.adapter = AdviceAdapter(act, RoomService.appDatabase.getAdviceDao().getAdviceWithPatient(patient?.patient_id))
-        if (withState) advice_list?.layoutManager?.onRestoreInstanceState(recyclerViewState1)
 
         val call = RetrofitService.endpoint.getAdviceWithPatient(patient?.patient_id, SharedPrefs(act).doctorId)
         call.enqueue(object : Callback<List<Advice>> {
@@ -108,21 +94,25 @@ class AdviceFragment : Fragment() {
                 call: Call<List<Advice>>?,
                 response: Response<List<Advice>>?
             ) {
-                if (response?.isSuccessful!!) {
-                    RoomService.appDatabase.getAdviceDao().addMyAdvice(response.body()!!)
+                if (response?.isSuccessful == true) {
+                    RoomService.appDatabase.getAdviceDao().deleteAdviceWithPatient(patient?.patient_id)
+                    RoomService.appDatabase.getAdviceDao().addMyAdvice(response.body())
                     val recyclerViewState2 = advice_list?.layoutManager?.onSaveInstanceState()
                     val advice = RoomService.appDatabase.getAdviceDao().getAdviceWithPatient(patient?.patient_id)
                     val oldCount = advice_list?.adapter?.itemCount
                     advice_list?.adapter = AdviceAdapter(act, advice)
-                    if (withState || advice.size <= oldCount!!) advice_list?.layoutManager?.onRestoreInstanceState(recyclerViewState2)
+                    try {
+                        if (withState || advice.size <= oldCount!!) advice_list?.layoutManager?.onRestoreInstanceState(recyclerViewState2)
+                    } catch (t: Throwable) {
+
+                    }
                 } else {
-                    checkFailure(act)
+                    checkFailure(act, null)
                 }
             }
 
             override fun onFailure(call: Call<List<Advice>>?, t: Throwable?) {
-                Log.e("Retrofit error", t.toString())
-                checkFailure(act)
+                checkFailure(act, t)
             }
         })
 
@@ -135,6 +125,5 @@ class AdviceFragment : Fragment() {
         setConstraints(constraints).addTag("doctor_advice_add_constraints").build()
         val workManager = WorkManager.getInstance(act)
         workManager.enqueueUniqueWork("doctor_advice_add_work", ExistingWorkPolicy.REPLACE,req)
-
     }
 }

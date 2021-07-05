@@ -27,7 +27,7 @@
         android:layout_height="0dp"
         android:clipToPadding="false"
         android:paddingVertical="16dp"
-        android:background="@color/white"
+        android:background="@color/medicana_lightestgray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

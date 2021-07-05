@@ -12,8 +12,7 @@ import com.example.medicana.entity.Advice
 import com.example.medicana.util.displayDateFromUnix
 import com.example.medicana.util.displayTimeFromUnix
 
-
-class AdviceAdapter(val context: Context, val data: List<Advice>): RecyclerView.Adapter<AdviceViewHolder>() {
+class AdviceAdapter(val context: Context, val data: List<Advice>): RecyclerView.Adapter<AdviceAdapter.AdviceViewHolder>() {
 
     private val message = 0
     private val reply = 1
@@ -42,16 +41,20 @@ class AdviceAdapter(val context: Context, val data: List<Advice>): RecyclerView.
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: AdviceViewHolder, position: Int) {
-        holder.adviceDateTime.text = displayDateFromUnix(data[position].date_time!!) + " - " + displayTimeFromUnix(data[position].date_time!!)
+        try {
+            holder.adviceDateTime.text = displayDateFromUnix(data[position].date_time!!) + " - " + displayTimeFromUnix(data[position].date_time!!)
+        } catch (t: Throwable) {
+
+        }
         if (data[position].message != null) {
             holder.adviceMessage.text = data[position].message
         } else {
             holder.adviceMessage.text = data[position].reply
         }
     }
-}
 
-class AdviceViewHolder(view: View): RecyclerView.ViewHolder(view) {
-    val adviceDateTime = view.findViewById(R.id.advice_datetime) as TextView
-    val adviceMessage = view.findViewById(R.id.advice_message) as TextView
+    class AdviceViewHolder(view: View): RecyclerView.ViewHolder(view) {
+        val adviceDateTime = view.findViewById(R.id.advice_datetime) as TextView
+        val adviceMessage = view.findViewById(R.id.advice_message) as TextView
+    }
 }

@@ -8,9 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.room.Room
 import com.bumptech.glide.Glide
 import com.example.medicana.R
 import com.example.medicana.prefs.SharedPrefs
@@ -67,14 +65,15 @@ class ProfileFragment : Fragment() {
 
         profile_name?.text = pref.firstName + " " + pref.lastName
         profile_phone?.text = pref.phoneNumber
-
-        if (pref.photo != null) {
-            Glide.with(act).load(BASE_URL + pref.photo).into(profile_photo)
-        } else {
-            if (pref.gender == "male") Glide.with(act).load(R.drawable.default_doctor_male).into(
-                profile_photo
-            )
-            else Glide.with(act).load(R.drawable.default_doctor_female).into(profile_photo)
+        if (profile_photo != null) {
+            if (pref.photo != null) {
+                Glide.with(act).load(BASE_URL + pref.photo).into(profile_photo)
+            } else {
+                if (pref.gender == "male") Glide.with(act).load(R.drawable.default_doctor_male).into(
+                        profile_photo
+                )
+                else Glide.with(act).load(R.drawable.default_doctor_female).into(profile_photo)
+            }
         }
 
         if (profile_bottom_sheet != null) {
@@ -83,7 +82,6 @@ class ProfileFragment : Fragment() {
                 peekHeight = 250
                 this.state = BottomSheetBehavior.STATE_COLLAPSED
             }
-
             bsBehave.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
                 override fun onStateChanged(bottomSheet: View, newState: Int) {
                     if (newState == BottomSheetBehavior.STATE_COLLAPSED) dimmed_bg.visibility = View.GONE
@@ -111,14 +109,13 @@ class ProfileFragment : Fragment() {
                     call: Call<String>?,
                     response: Response<String>?
                 ) {
-                    if (!response?.isSuccessful!!) {
-                        checkFailure(act)
+                    if (response?.isSuccessful == false) {
+                        checkFailure(act, null)
                     }
                 }
 
                 override fun onFailure(call: Call<String>?, t: Throwable?) {
-                    Log.e("Retrofit error", t.toString())
-                    checkFailure(act)
+                    checkFailure(act, t)
                 }
             })
 
@@ -144,7 +141,6 @@ class ProfileFragment : Fragment() {
                     msg = "not unsubscribed"
                 }
                 Log.d("firebase", msg)
-                //Toast.makeText(act, msg, Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -156,7 +152,6 @@ class ProfileFragment : Fragment() {
                     msg = "not unsubscribed"
                 }
                 Log.d("firebase", msg)
-                //Toast.makeText(act, msg, Toast.LENGTH_SHORT).show()
             }
     }
 }

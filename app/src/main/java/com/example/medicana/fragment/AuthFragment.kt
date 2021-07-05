@@ -38,7 +38,6 @@ class AuthFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_auth, container, false)
     }
 
@@ -53,18 +52,18 @@ class AuthFragment : Fragment() {
         }
 
         auth_login_button?.setOnClickListener {
-            if ((auth_phone.text.isNotEmpty()) && (auth_password.text.isNotEmpty())) {
+            if ((auth_phone?.text?.isNotEmpty() == true) && (auth_password?.text?.isNotEmpty() == true)) {
                 val phone = auth_phone.text.toString()
-                auth_phone.text.clear()
+                auth_phone.isEnabled = false
                 val password = auth_password.text.toString()
-                auth_password.text.clear()
+                auth_password.isEnabled = false
                 val call = RetrofitService.endpoint.authDoctor(phone, password)
                 call.enqueue(object : Callback<Doctor> {
                     override fun onResponse(
                         call: Call<Doctor>?,
                         response: Response<Doctor>?
                     ) {
-                        if (response?.isSuccessful!!) {
+                        if (response?.isSuccessful == true) {
                             val doctor = response.body()
                             if (doctor?.doctor_id != null) {
                                 val prefs = SharedPrefs(act)
@@ -85,19 +84,24 @@ class AuthFragment : Fragment() {
                                 navController(act).navigateUp()
                             } else {
                                 Toast.makeText(act, R.string.login_error, Toast.LENGTH_LONG).show()
+                                auth_phone.isEnabled = true
+                                auth_password.isEnabled = true
                             }
                         } else {
-                            checkFailure(act)
+                            checkFailure(act, null)
+                            auth_phone.isEnabled = true
+                            auth_password.isEnabled = true
                         }
                     }
 
                     override fun onFailure(call: Call<Doctor>?, t: Throwable?) {
-                        Log.e("Retrofit error", t.toString())
-                        checkFailure(act)
+                        checkFailure(act, t)
+                        auth_phone.isEnabled = true
+                        auth_password.isEnabled = true
                     }
                 })
             } else {
-                Toast.makeText(act, "Please login with your phone number and password", Toast.LENGTH_SHORT).show()
+                Toast.makeText(act, R.string.missing_phone_pass, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -109,7 +113,7 @@ class AuthFragment : Fragment() {
                 call: Call<List<Appointment>>?,
                 response: Response<List<Appointment>>?
             ) {
-                if (response?.isSuccessful!!) {
+                if (response?.isSuccessful == true) {
                     val appointments = response.body()
                     val call2 = RetrofitService.endpoint.getMyPatients(doctor_id)
                     call2.enqueue(object : Callback<List<Patient>> {
@@ -117,7 +121,7 @@ class AuthFragment : Fragment() {
                             call: Call<List<Patient>>?,
                             response: Response<List<Patient>>?
                         ) {
-                            if (response?.isSuccessful!!) {
+                            if (response?.isSuccessful == true) {
                                 val patients = response.body()
                                 val call3 = RetrofitService.endpoint.getAllAdvice(doctor_id)
                                 call3.enqueue(object : Callback<List<Advice>> {
@@ -125,7 +129,7 @@ class AuthFragment : Fragment() {
                                         call: Call<List<Advice>>?,
                                         response: Response<List<Advice>>?
                                     ) {
-                                        if (response?.isSuccessful!!) {
+                                        if (response?.isSuccessful == true) {
                                             val advice = response.body()
                                             val call4 = RetrofitService.endpoint.getMyTreatments(doctor_id)
                                             call4.enqueue(object : Callback<List<Treatment>> {
@@ -133,74 +137,60 @@ class AuthFragment : Fragment() {
                                                         call: Call<List<Treatment>>?,
                                                         response: Response<List<Treatment>>?
                                                 ) {
-                                                    if (response?.isSuccessful!!) {
+                                                    if (response?.isSuccessful == true) {
                                                         try {
-                                                            RoomService.appDatabase.getAppointmentDao()
-                                                                    .addMyAppointments(appointments!!)
-                                                            RoomService.appDatabase.getPatientDao()
-                                                                    .addMyPatients(patients!!)
-                                                            RoomService.appDatabase.getAdviceDao()
-                                                                    .addMyAdvice(advice!!)
-                                                            RoomService.appDatabase.getTreatmentDao()
-                                                                    .addMyTreatments(response.body()!!)
-                                                        } catch (e: Exception) {
+                                                            RoomService.appDatabase.getAppointmentDao().addMyAppointments(appointments)
+                                                            RoomService.appDatabase.getPatientDao().addMyPatients(patients)
+                                                            RoomService.appDatabase.getAdviceDao().addMyAdvice(advice)
+                                                            RoomService.appDatabase.getTreatmentDao().addMyTreatments(response.body())
+                                                        } catch (t: Throwable) {
                                                             Toast.makeText(
                                                                     act,
-                                                                    "Your information wasn't completely restored!",
+                                                                    R.string.db_error,
                                                                     Toast.LENGTH_LONG
                                                             ).show()
                                                         }
                                                     } else {
-                                                        checkFailure(act)
+                                                        checkFailure(act, null)
                                                     }
                                                 }
 
                                                 override fun onFailure(call: Call<List<Treatment>>?, t: Throwable?) {
-                                                    Log.e("Retrofit error", t.toString())
-                                                    checkFailure(act)
+                                                    checkFailure(act, t)
                                                 }
                                             })
-
                                         } else {
-                                            checkFailure(act)
+                                            checkFailure(act, null)
                                         }
                                     }
 
                                     override fun onFailure(call: Call<List<Advice>>?, t: Throwable?) {
-                                        Log.e("Retrofit error", t.toString())
-                                        checkFailure(act)
+                                        checkFailure(act, t)
                                     }
                                 })
-
-
                             } else {
-                                checkFailure(act)
+                                checkFailure(act, null)
                             }
                         }
 
                         override fun onFailure(call: Call<List<Patient>>?, t: Throwable?) {
-                            Log.e("Retrofit error", t.toString())
-                            checkFailure(act)
+                            checkFailure(act, t)
                         }
                     })
-
                 } else {
-                    checkFailure(act)
+                    checkFailure(act, null)
                 }
             }
 
             override fun onFailure(call: Call<List<Appointment>>?, t: Throwable?) {
-                Log.e("Retrofit error", t.toString())
-                checkFailure(act)
+                checkFailure(act, t)
             }
         })
-
     }
 
     private fun registerToken(doctor_id: Long) {
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
-                Log.w("firebase", "Fetching FCM registration token failed", task.exception)
                 return@OnCompleteListener
             } else {
                 val call = RetrofitService.endpoint.registerToken(
@@ -217,13 +207,12 @@ class AuthFragment : Fragment() {
                             prefs.deviceId = response.body()!!
                             prefs.token = task.result
                         } else {
-                            checkFailure(act)
+                            checkFailure(act, null)
                         }
                     }
 
                     override fun onFailure(call: Call<Long>?, t: Throwable?) {
-                        Log.e("Retrofit error", t.toString())
-                        checkFailure(act)
+                        checkFailure(act, t)
                     }
                 })
             }
@@ -239,7 +228,6 @@ class AuthFragment : Fragment() {
                     msg = "not subscribed"
                 }
                 Log.d("firebase", msg)
-                //Toast.makeText(act, msg, Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -251,7 +239,6 @@ class AuthFragment : Fragment() {
                     msg = "not subscribed"
                 }
                 Log.d("firebase", msg)
-                //Toast.makeText(act, msg, Toast.LENGTH_SHORT).show()
             }
     }
 
